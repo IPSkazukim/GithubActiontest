@@ -8,6 +8,7 @@ githubのactionの動作検証用
 ### 機能
 
 - Pythonソースコードのdocstringから自動的にHTMLドキュメントを生成
+- **アルゴリズムの視覚化**: EuclideanGCDのgcdメソッドのフローをMermaid図で視覚化
 - GitHub Pagesにドキュメントを自動デプロイ
 - mainまたはmasterブランチへのpush時に自動実行
 
@@ -24,6 +25,13 @@ githubのactionの動作検証用
 ```
 https://{username}.github.io/GithubActiontest/
 ```
+
+#### 特別なページ
+
+- **[gcd_flow.html](https://{username}.github.io/GithubActiontest/gcd_flow.html)**: EuclideanGCDのgcdメソッドのアルゴリズムフローをMermaid図で視覚化したページ
+  - アルゴリズムの各ステップを詳細に説明
+  - 具体的な実行例（gcd(48, 18)、gcd(1071, 462)）を掲載
+  - フローチャートで処理の流れを直感的に理解可能
 
 ### ローカルでのドキュメント生成
 

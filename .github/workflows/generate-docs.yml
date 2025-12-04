@@ -35,6 +35,11 @@ jobs:
             mv docs/src/* docs/
             rm -rf docs/src
           fi
+          # Backup the auto-generated index
+          mv docs/index.html docs/api_index.html
+          # Copy custom pages
+          cp docs_index.html docs/index.html
+          cp gcd_flow.html docs/
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuclideanGCD.gcd メソッドのフロー図</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f6f8fa;
+        }
+        .container {
+            background-color: white;
+            border-radius: 6px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+        h1 {
+            color: #24292e;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 10px;
+        }
+        .description {
+            color: #586069;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .diagram-container {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f6f8fa;
+            border-radius: 6px;
+        }
+        .code-example {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-example pre {
+            margin: 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .step-explanation {
+            margin-top: 30px;
+        }
+        .step-explanation h2 {
+            color: #24292e;
+            margin-top: 30px;
+        }
+        .step-explanation ol {
+            line-height: 1.8;
+        }
+        .step-explanation li {
+            margin-bottom: 15px;
+        }
+        .example-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff5e1;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        .example-section h3 {
+            color: #24292e;
+            margin-top: 0;
+        }
+        .example-trace {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← ドキュメントのトップに戻る</a>
+        <a href="euclidean.html" class="back-link" style="margin-left: 20px;">EuclideanGCDクラスのドキュメントを見る →</a>
+        
+        <h1>EuclideanGCD.gcd メソッドのフロー図</h1>
+        
+        <div class="description">
+            <p>このページでは、<code>EuclideanGCD</code>クラスの<code>gcd</code>メソッドのアルゴリズムの流れを視覚的に説明します。</p>
+            <p>ユークリッドの互除法は、2つの整数の最大公約数（GCD）を効率的に計算するアルゴリズムです。</p>
+        </div>
+
+        <div class="code-example">
+            <pre><code>def gcd(self, a: int, b: int) -&gt; int:
+    # 負の数のチェック
+    if a &lt; 0 or b &lt; 0:
+        raise ValueError("負の数は使用できません")
+    
+    # bが0の場合、aが最大公約数
+    if b == 0:
+        return a
+    
+    # ユークリッドの互除法のメインループ
+    while b != 0:
+        quotient = int(a // b)
+        remainder = int(self.calculator.subtract(a, self.calculator.multiply(quotient, b)))
+        a = b
+        b = remainder
+    
+    return a</code></pre>
+        </div>
+
+        <div class="diagram-container">
+            <div class="mermaid">
+flowchart TD
+    Start([開始: gcd&#40;a, b&#41;]) --> CheckNegative{a &lt; 0 または<br/>b &lt; 0?}
+    CheckNegative -->|はい| RaiseError[ValueError を発生:<br/>負の数は使用できません]
+    CheckNegative -->|いいえ| CheckZero{b == 0?}
+    
+    CheckZero -->|はい| ReturnA[a を返す]
+    CheckZero -->|いいえ| LoopStart[ループ開始]
+    
+    LoopStart --> CalcQuotient[quotient = a // b<br/>&#40;整数除算&#41;]
+    CalcQuotient --> CalcRemainder[remainder = a - &#40;quotient × b&#41;<br/>&#40;剰余計算&#41;]
+    CalcRemainder --> UpdateValues[a = b<br/>b = remainder]
+    UpdateValues --> CheckLoop{b != 0?}
+    
+    CheckLoop -->|はい| CalcQuotient
+    CheckLoop -->|いいえ| ReturnFinal[a を返す<br/>&#40;これがGCD&#41;]
+    
+    ReturnA --> End([終了])
+    ReturnFinal --> End
+    RaiseError --> End
+    
+    style Start fill:#e1f5e1
+    style End fill:#ffe1e1
+    style RaiseError fill:#ffcccc
+    style ReturnA fill:#cce5ff
+    style ReturnFinal fill:#cce5ff
+    style CheckNegative fill:#fff4cc
+    style CheckZero fill:#fff4cc
+    style CheckLoop fill:#fff4cc
+    style CalcQuotient fill:#e6f3ff
+    style CalcRemainder fill:#e6f3ff
+    style UpdateValues fill:#e6f3ff
+            </div>
+        </div>
+
+        <div class="step-explanation">
+            <h2>アルゴリズムの詳細説明</h2>
+            
+            <ol>
+                <li>
+                    <strong>入力検証:</strong> まず、入力値 <code>a</code> と <code>b</code> が負の数でないかチェックします。
+                    負の数の場合は <code>ValueError</code> を発生させます。
+                </li>
+                
+                <li>
+                    <strong>基底ケース:</strong> <code>b</code> が 0 の場合、<code>a</code> が最大公約数となるため、そのまま <code>a</code> を返します。
+                </li>
+                
+                <li>
+                    <strong>商の計算:</strong> <code>a</code> を <code>b</code> で整数除算して商（quotient）を求めます。
+                </li>
+                
+                <li>
+                    <strong>剰余の計算:</strong> <code>a mod b</code> を計算します。これは <code>a - (quotient × b)</code> として実装されています。
+                    Calculatorクラスの <code>subtract</code> と <code>multiply</code> メソッドを使用して計算します。
+                </li>
+                
+                <li>
+                    <strong>値の更新:</strong> 次のイテレーションのために、<code>a = b</code>、<code>b = remainder</code> と更新します。
+                    これがユークリッドの互除法の核心部分です。
+                </li>
+                
+                <li>
+                    <strong>ループ継続判定:</strong> <code>b</code> が 0 でない限りステップ3〜5を繰り返します。
+                </li>
+                
+                <li>
+                    <strong>結果の返却:</strong> <code>b</code> が 0 になったとき、<code>a</code> が最大公約数となるため、<code>a</code> を返します。
+                </li>
+            </ol>
+        </div>
+
+        <div class="example-section">
+            <h3>実行例: gcd(48, 18)</h3>
+            <p>48と18の最大公約数を求める場合の実行トレース:</p>
+            <div class="example-trace">
+                <pre>初期値: a = 48, b = 18
+
+イテレーション 1:
+  quotient = 48 // 18 = 2
+  remainder = 48 - (2 × 18) = 48 - 36 = 12
+  更新: a = 18, b = 12
+
+イテレーション 2:
+  quotient = 18 // 12 = 1
+  remainder = 18 - (1 × 12) = 18 - 12 = 6
+  更新: a = 12, b = 6
+
+イテレーション 3:
+  quotient = 12 // 6 = 2
+  remainder = 12 - (2 × 6) = 12 - 12 = 0
+  更新: a = 6, b = 0
+
+b == 0 なのでループ終了
+
+結果: a = 6 が最大公約数</pre>
+            </div>
+        </div>
+
+        <div class="example-section">
+            <h3>実行例: gcd(1071, 462)</h3>
+            <p>より大きな数の場合:</p>
+            <div class="example-trace">
+                <pre>初期値: a = 1071, b = 462
+
+イテレーション 1:
+  quotient = 1071 // 462 = 2
+  remainder = 1071 - (2 × 462) = 1071 - 924 = 147
+  更新: a = 462, b = 147
+
+イテレーション 2:
+  quotient = 462 // 147 = 3
+  remainder = 462 - (3 × 147) = 462 - 441 = 21
+  更新: a = 147, b = 21
+
+イテレーション 3:
+  quotient = 147 // 21 = 7
+  remainder = 147 - (7 × 21) = 147 - 147 = 0
+  更新: a = 21, b = 0
+
+b == 0 なのでループ終了
+
+結果: a = 21 が最大公約数</pre>
+            </div>
+        </div>
+
+        <div class="step-explanation">
+            <h2>計算量について</h2>
+            <p>
+                ユークリッドの互除法の時間計算量は <strong>O(log min(a, b))</strong> です。
+                これは、各イテレーションで値が少なくとも半分になるため、非常に効率的なアルゴリズムです。
+            </p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>
