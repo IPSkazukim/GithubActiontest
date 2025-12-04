@@ -59,10 +59,6 @@ class EuclideanGCD:
         if a < 0 or b < 0:
             raise ValueError("負の数は使用できません")
         
-        # aとbを絶対値に変換（念のため）
-        a = abs(a)
-        b = abs(b)
-        
         # bが0の場合、aが最大公約数
         if b == 0:
             return a
@@ -71,7 +67,9 @@ class EuclideanGCD:
         while b != 0:
             # Calculatorを使用してa mod bを計算
             # a mod b = a - (a // b) * b
-            quotient = int(self.calculator.divide(a, b))
+            # 整数除算のため、除算結果をintに変換してから計算
+            quotient = int(a // b)
+            # Calculatorを使用して剰余を計算
             remainder = int(self.calculator.subtract(a, self.calculator.multiply(quotient, b)))
             
             # 次のイテレーションのための値を更新
