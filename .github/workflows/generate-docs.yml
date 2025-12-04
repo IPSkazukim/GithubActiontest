@@ -27,18 +27,13 @@ jobs:
         run: |
           pip install -r requirements.txt
       
-      - name: Generate documentation with pdoc3
+      - name: Generate documentation with MkDocs
         run: |
-          pdoc3 --html --output-dir docs --force src
-          # pdoc3 creates a 'src' subdirectory, so we move its contents up
-          if [ -d "docs/src" ]; then
-            mv docs/src/* docs/
-            rm -rf docs/src
-          fi
+          mkdocs build
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./site
           publish_branch: gh-pages

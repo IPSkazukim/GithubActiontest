@@ -1,4 +1,5 @@
-# GithubActiontest
+# GithubActionTest
+
 githubのactionの動作検証用
 
 ## ドキュメント自動生成
@@ -10,19 +11,20 @@ githubのactionの動作検証用
 - Pythonソースコードのdocstringから自動的にHTMLドキュメントを生成
 - GitHub Pagesにドキュメントを自動デプロイ
 - mainまたはmasterブランチへのpush時に自動実行
+- Mermaid図のサポート
 
 ### ドキュメント生成の仕組み
 
 1. **ソースコード**: `src/` ディレクトリにPythonファイルとdocstringが含まれています
 2. **GitHub Actions**: `.github/workflows/generate-docs.yml` がドキュメント生成を自動化します
-3. **MkDocs**: Pythonのdocstringから美しいHTMLドキュメントを生成します（Mermaid図のサポート付き）
+3. **MkDocs**: Pythonのdocstringから美しいHTMLドキュメントを生成します
 4. **GitHub Pages**: 生成されたドキュメントは `gh-pages` ブランチにデプロイされます
 
 ### ドキュメントの閲覧
 
 ドキュメントは以下のURLで閲覧できます（GitHub Pagesを有効にした後）:
 ```
-https://{username}.github.io/GithubActiontest/
+https://IPSkazukim.github.io/GithubActionTest/
 ```
 
 ### ローカルでのドキュメント生成
@@ -34,7 +36,7 @@ pip install -r requirements.txt
 # ドキュメントの生成
 mkdocs build
 
-# ローカルサーバーで確認（開発用）
+# ローカルサーバーで確認
 mkdocs serve
 ```
 
@@ -57,3 +59,11 @@ mkdocs serve
 ├── requirements.txt            # Python依存関係
 └── README.md                   # このファイル
 ```
+
+## APIドキュメント
+
+各モジュールの詳細なAPIドキュメントは、左側のナビゲーションメニューからアクセスできます。
+
+- [Calculator](api/calculator.md) - 基本的な計算機能
+- [Utils](api/utils.md) - ユーティリティ関数
+- [Euclidean](api/euclidean.md) - ユークリッドの互除法

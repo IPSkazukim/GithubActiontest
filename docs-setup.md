@@ -56,16 +56,19 @@
 # 依存関係のインストール
 pip install -r requirements.txt
 
-# ドキュメントの生成
-pdoc3 --html --output-dir docs --force src
-
-# 生成されたファイルを移動
-mv docs/src/* docs/
-rm -rf docs/src
-
-# シンプルなHTTPサーバーで確認
-cd docs
-python -m http.server 8000
+# ローカルサーバーで確認（開発用）
+mkdocs serve
 ```
 
 ブラウザで `http://localhost:8000` を開くとドキュメントを確認できます。
+
+または、静的ファイルを生成してから確認することもできます:
+
+```bash
+# ドキュメントの生成
+mkdocs build
+
+# 生成されたファイルはsiteディレクトリに作成されます
+cd site
+python -m http.server 8000
+```

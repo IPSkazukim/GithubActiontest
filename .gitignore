@@ -1,5 +1,5 @@
 # Documentation generated locally (GitHub Actions will generate and deploy)
-docs/
+site/
 
 # Python
 __pycache__/

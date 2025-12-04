@@ -1,1 +1,4 @@
-pdoc3==0.10.0
+mkdocs>=1.4.0
+mkdocs-material>=9.0.0
+mkdocstrings[python]>=0.20.0
+pymdown-extensions>=10.0
