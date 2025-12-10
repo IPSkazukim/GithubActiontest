@@ -1,7 +1,4 @@
 [MASTER]
-# Pythonファイルのエンコーディング
-init-hook='import sys; sys.setdefaultencoding("utf-8") if hasattr(sys, "setdefaultencoding") else None'
-
 # 並列実行のジョブ数（0は自動検出）
 jobs=1
 
